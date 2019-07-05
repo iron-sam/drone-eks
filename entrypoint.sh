@@ -57,7 +57,7 @@ get_kubeconfig "${clustername}" "${region}" "${iam_role}"
 status=$( k8s_resource_exist "${kind}/${name}" "${namespace}" )
 if [ "${status}" == 0 ]
 then
-  update_resource "${kind}/${name}" "${container}" "${image_tag}"
+  update_resource "${kind}/${name}" "${container}" "${image_tag}" "${namespace}"
 else
   echo "Resource ${kind}/${name} doesn't exist on namespace ${namespace}"
   RC=1
