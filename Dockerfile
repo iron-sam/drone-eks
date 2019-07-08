@@ -9,7 +9,7 @@ RUN apk add python3 curl --no-cache \
 
 FROM alpine:3.10 as final
 
-RUN apk add python3 jq bash --no-cache
+RUN apk add python3 bash --no-cache
 COPY --from=dependencies --chown=root:root /usr/local/aws /usr/local/aws
 COPY --from=dependencies --chown=root:root /usr/local/bin/aws /usr/local/bin/aws
 COPY --from=dependencies --chown=root:root /kubectl /usr/local/bin/kubectl
