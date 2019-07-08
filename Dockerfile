@@ -13,8 +13,8 @@ RUN apk add python3 bash --no-cache
 COPY --from=dependencies --chown=root:root /usr/local/aws /usr/local/aws
 COPY --from=dependencies --chown=root:root /usr/local/bin/aws /usr/local/bin/aws
 COPY --from=dependencies --chown=root:root /kubectl /usr/local/bin/kubectl
-COPY entrypoint.sh entrypoint.sh
+COPY entrypoint.sh /bin/entrypoint.sh
 
 ENTRYPOINT [ "/bin/bash" ]
 
-CMD [ "/entrypoint.sh" ]
+CMD [ "/bin/entrypoint.sh" ]
