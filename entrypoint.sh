@@ -4,8 +4,7 @@ IFS=$'\n\t'
 
 get_kubeconfig() {
   local clustername=$1
-  local region=$2
-  local rolearn=$3
+  local rolearn=$2
   
   if [ -n "${rolearn}" ]
   then
@@ -59,7 +58,7 @@ then
   export AWS_SECRET_ACCESS_KEY="${PLUGIN_SECRET_KEY}"
 fi
 
-get_kubeconfig "${clustername}" "${region}" "${iam_role}"
+get_kubeconfig "${clustername}" "${iam_role}"
 
 status=$( k8s_resource_exist "${kind}/${name}" "${namespace}" )
 if [ "${status}" == 0 ]
