@@ -9,9 +9,9 @@ get_kubeconfig() {
   
   if [ -n "${rolearn}" ]
   then
-    cli="aws eks update-kubeconfig --name ${clustername} --role-arn ${rolearn} --region ${region}"
+    cli="aws eks update-kubeconfig --name ${clustername} --role-arn ${rolearn}"
   fi
-  cli="aws eks update-kubeconfig --name ${clustername} --region ${region}"
+  cli="aws eks update-kubeconfig --name ${clustername}"
   
   if ! eval "$cli" &> /dev/null
   then
@@ -48,9 +48,16 @@ name="${PLUGIN_NAME}"
 image_tag="${PLUGIN_IMAGE_TAG}"
 container="${PLUGIN_CONTAINER}"
 namespace="${PLUGIN_NAMESPACE:-"default"}"
-region="${PLUGIN_AWS_REGION:-"us-east-2"}"
 kind="${PLUGIN_KIND:-"deployment"}"
 iam_role="${PLUGIN_IAM_ROLE:-""}"
+
+export AWS_DEFAULT_REGION="${PLUGIN_AWS_REGION:-"us-east-2"}"
+
+if [[ -n "${PLUGIN_ACCESS_KEY}" ]] && [[ -n "${PLUGIN_SECRET_KEY}" ]]
+then
+  export AWS_ACCESS_KEY_ID="${PLUGIN_ACCESS_KEY}"
+  export AWS_SECRET_ACCESS_KEY="${PLUGIN_SECRET_KEY}"
+fi
 
 get_kubeconfig "${clustername}" "${region}" "${iam_role}"
 

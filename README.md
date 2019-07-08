@@ -18,8 +18,11 @@ steps:
     name: ${RESOURCE_NAME}
     image_tag: ${IMAGE_TAG_NAME}
     container: ${CONTAINER_NAME}
+    access_key: ${AWS_ACCESS_KEY_ID}    # Optional
+    secret_key: ${AWS_SECRET_ACCESS_KEY}    # Optional
     namespace: ${K8S_NAMESPACE}  # Optional, default to "default"
     aws_region: ${AWS_REGION}  # Optional, default to "us-east-2"
     kind: ${K8S_RESOURCE_TYPE}  # Optional, default to "deployment"
     iam_role: ${AWS_IAM_ROLE}  # Optional, default to ""
+
 ```
